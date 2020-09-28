@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
 var shortid = require('shortid');
+
 // Basic Configuration 
 var port = process.env.PORT || 3000;
 
@@ -27,9 +28,11 @@ app.use(cors({optionsSuccessStatus: 200}));
  
 // express.js basic routing
 
- app.get('/', function (req, res) {
- res.send(__dirname + '/views/index.html');
+ app.get("/", function (req, res) {
+ res.sendFile(__dirname + '/views/index.html');
  });
+
+
 
 // schema and model 
 var ShortUrl = mongoose.model('ShortUrl', new mongoose.Schema ({
@@ -89,6 +92,6 @@ app.get("/api/hello", function (req, res) {
 });
 
 
-app.listen(port, function () {
-  console.log('Node.js listening ...');
+var listener = app.listen(process.env.PORT || 3000, function () {
+  console.log('Your app is listening on port ' + listener.address().port);
 });
